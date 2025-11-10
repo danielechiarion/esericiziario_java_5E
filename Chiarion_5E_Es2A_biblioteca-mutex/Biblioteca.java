@@ -10,7 +10,12 @@ public class Biblioteca(){
 		while(this.numPostazioni==0){
 			try{
 				wait();
-			}catch(
+			}catch(InterruptedException e){}
 		}
+		this.numPostazioni--;
+	}
+
+	public synchronized void esci(){
+		this.numPostazioni++;
 	}
 }
