@@ -6,8 +6,7 @@ import java.time.Duration;
 public class Main {
     public static void main(String[] args) {
         /* variable declaration */
-        int threadNumber, searchNumber;
-        long startingTime, endingTime;
+        int threadNumber;
         /* create scanner */
         Scanner scanner = new Scanner( System.in );
         /* create random array with numbers */
@@ -17,8 +16,6 @@ public class Main {
 
         /* ask in input the number to search
          * and the thread */
-        System.out.println( "Inserisci il numero da ricercare: " );
-        searchNumber = scanner.nextInt();
         do {
             System.out.println( "Inserisci il numero di thread: " );
             threadNumber = scanner.nextInt();
@@ -27,11 +24,19 @@ public class Main {
 
         /* create the threads based on
         * the number given */
-        ThreadExample[] threads = new ThreadExample[threadNumber];
+        Thread[] threads = new Thread[threadNumber];
         for(int i=0;i<threadNumber;i++)
-                threads[i] = new ThreadExample(sharedResource, i);
+                threads[i] = new Thread(new ThreadExample(sharedResource, i));
 
         /* start the thread and wait them till the end */
-        for(ThreadExample singleThread : threads);
+        for(Thread singleThread : threads)
+            singleThread.start();
+        for(Thread singleThread : threads) {
+            try {
+                singleThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

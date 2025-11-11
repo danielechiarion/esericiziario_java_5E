@@ -6,7 +6,9 @@ public class SharedResource {
     }
 
     public void populateArray(int number){
-        for(int i=0;i<array.length;i++)
+        for(int i=0;i<array.length;i++){
             this.array[i] = number;
+            System.out.println("Posizione "+i+" numero: "+number);
+        }
     }
 }
