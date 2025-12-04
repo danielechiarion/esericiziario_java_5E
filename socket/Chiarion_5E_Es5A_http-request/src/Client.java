@@ -20,7 +20,10 @@ public class Client implements Runnable {
             writer.println("Host: google.it");
             writer.println("Connection: close");
             writer.println();
-            System.out.println(reader.readLine());
+
+            String response;
+            while((response = reader.readLine()) != null)
+                System.out.println(response);
 
             reader.close();
             writer.close();
